@@ -8,7 +8,7 @@ from venicle.views import (
     MotoDestroyAPIView,
     MotoListAPIView,
     MotoRetrieveAPIView,
-    MotoUpdateAPIView,
+    MotoUpdateAPIView, MileageCreateAPIView, MotoMileageListAPIView, MileageListAPIView,
 )
 
 app_name = VenicleConfig.name
@@ -24,4 +24,9 @@ urlpatterns = [
     path("moto/<int:pk>/", MotoRetrieveAPIView.as_view(), name="moto-get"),
     path("moto/update/<int:pk>/", MotoUpdateAPIView.as_view(), name="moto-update"),
     path("moto/delete/<int:pk>/", MotoDestroyAPIView.as_view(), name="moto-destroy"),
+
+    #mileage
+    path("mileage/", MileageListAPIView.as_view(), name="mileage-list"),
+    path("mileage/create/", MileageCreateAPIView.as_view(), name="mileage-create"),
+    path("moto/mileage/", MotoMileageListAPIView.as_view(), name="moto-mileage-create"),
 ] + router.urls

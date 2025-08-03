@@ -28,3 +28,19 @@ class MotoList(models.Model):
     class Meta:
         verbose_name = "Мотоцикл"
         verbose_name_plural = "Мотоциклы"
+
+
+class Mileage(models.Model):
+    """ Модель 'Пробег' """
+    car = models.ForeignKey(to=CarsList, on_delete=models.CASCADE, null=True, blank=True, related_name="mileage")
+    moto = models.ForeignKey(to=MotoList, on_delete=models.CASCADE, null=True, blank=True, related_name="mileage")
+    mileage = models.PositiveIntegerField(verbose_name="Пробег")
+    year = models.PositiveSmallIntegerField(verbose_name="Год регистрации")
+
+    def __str__(self):
+        return f"{self.moto if self.moto else self.car} - {self.year}"
+
+    class Meta:
+        verbose_name = "пробег"
+        verbose_name_plural = "пробег"
+        ordering = ("-year", )
